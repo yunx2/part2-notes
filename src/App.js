@@ -16,6 +16,8 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
+  const noteFormRef = React.createRef()
+
   useEffect(() => {
     noteService
       .getAll()
@@ -34,9 +36,10 @@ const App = () => {
   }, [])
 
   const addNote = (noteObject) => {
+    noteFormRef.current.toggleVisibility()
     noteService
       .create(noteObject)
-      .then(returnedNote => {
+      .then(returnedNote => {     
         setNotes(notes.concat(returnedNote))
       })
   }
@@ -96,7 +99,7 @@ const App = () => {
   )
 
   const noteForm = () => (
-    <Togglable buttonLabel='new note'>
+    <Togglable buttonLabel='new note' ref={noteFormRef}>
       <NoteForm createNote={addNote} />
     </Togglable>
   )
