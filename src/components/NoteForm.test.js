@@ -17,6 +17,5 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   fireEvent.submit(form)
 
   expect(createNote.mock.calls.length).toBe(1)
-  //console.log(JSON.stringify(createNote.mock.calls[0][0].content, null, 2))
   expect(createNote.mock.calls[0][0].content).toBe('testing of forms could be easier' )
 })
